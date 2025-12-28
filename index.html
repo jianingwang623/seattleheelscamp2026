@@ -7,15 +7,15 @@
     <title>Seattle Heels Camp 2026</title>
     <style>
         :root {
-            --bg: #f9fafb;
-            --card: #ffffff;
-            --accent: #2b6cb0;
-            --text: #111827
+            --bg: #000000;
+            --card: #0b0b0b;
+            --accent: rgb(255, 0, 255);
+            --text: #ffffff
         }
 
         body {
-            font-family: Segoe UI, Arial, sans-serif;
-            margin: 40px;
+            font-family: monospace;
+            margin: 0 40px 40px;
             background: var(--bg);
             color: var(--text)
         }
@@ -23,11 +23,6 @@
         .container {
             max-width: 900px;
             margin: 0 auto
-        }
-
-        header h1 {
-            color: var(--accent);
-            margin: 0 0 8px
         }
 
         .card {
@@ -46,14 +41,134 @@
 
 <body>
     <div class="container">
-        <header class="card">
+        <header class="card full-bleed">
             <h1>Seattle Heels Camp 2026</h1>
-            <p>Welcome — this is a basic HTML page added to the repository.</p>
-            <p>Next steps: add images, styles, or additional pages as needed.</p>
-            <p><a href="https://github.com/jianingwang623/seattleheelscamp2026" target="_blank"
-                    rel="noopener">Repository on GitHub</a></p>
+
+            <nav class="tabs" role="tablist" aria-label="Primary">
+                <button class="tab-button active" data-target="home" role="tab" aria-selected="true">Home</button>
+                <button class="tab-button" data-target="register" role="tab" aria-selected="false">Register</button>
+                <button class="tab-button" data-target="faculty" role="tab" aria-selected="false">Faculty</button>
+                <button class="tab-button" data-target="schedule" role="tab" aria-selected="false">Schedule</button>
+                <button class="tab-button" data-target="venue" role="tab" aria-selected="false">Venue</button>
+            </nav>
         </header>
+
+        <section class="card" id="main-content" style="margin-top:16px;">
+            <div class="tab-content">
+                <div id="home" class="tab-pane active" role="tabpanel">
+                    <iframe src="home.html" title="Home"
+                        style="width:100%;height:100%;border:0;min-height:200px;"></iframe>
+                </div>
+
+                <div id="register" class="tab-pane" role="tabpanel" hidden>
+                    <iframe src="register.html" title="Register"
+                        style="width:100%;height:100%;border:0;min-height:200px;"></iframe>
+                </div>
+
+                <div id="faculty" class="tab-pane" role="tabpanel" hidden>
+                    <iframe src="faculty.html" title="Faculty"
+                        style="width:100%;height:100%;border:0;min-height:200px;"></iframe>
+                </div>
+
+                <div id="schedule" class="tab-pane" role="tabpanel" hidden>
+                    <iframe src="schedule.html" title="Schedule"
+                        style="width:100%;height:100%;border:0;min-height:200px;"></iframe>
+                </div>
+
+                <div id="venue" class="tab-pane" role="tabpanel" hidden>
+                    <iframe src="venue.html" title="Venue"
+                        style="width:100%;height:100%;border:0;min-height:200px;"></iframe>
+                </div>
+            </div>
+        </section>
     </div>
+
+    <style>
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+
+        /* layout the header: title on left, tabs centered on same row */
+        header.full-bleed.card {
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            border-radius: 0;
+            padding: 20px 16px;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            column-gap: 12px;
+        }
+
+        header.full-bleed.card h1 {
+            font-size: 20px;
+            color: rgb(255, 0, 255);
+            margin: 0;
+        }
+
+        header.full-bleed.card .tabs {
+            justify-self: center;
+        }
+
+        .tab-button {
+            background: transparent;
+            font-family: monospace;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: rgb(255, 0, 255);
+            font-weight: bold;
+            border-color: transparent;
+        }
+
+        .tab-button.active {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+            font-weight: bold;
+            font-family: monospace;
+        }
+
+        .tab-pane {
+            min-height: 240px;
+        }
+
+        /* keep the content area visually separate from the header */
+        #main-content {
+            padding-top: 8px
+        }
+    </style>
+
+    <script>
+        (function () {
+            const buttons = document.querySelectorAll('.tab-button');
+            const panes = document.querySelectorAll('.tab-pane');
+
+            function activate(target) {
+                buttons.forEach(b => {
+                    const t = b.getAttribute('data-target');
+                    const is = t === target;
+                    b.classList.toggle('active', is);
+                    b.setAttribute('aria-selected', is ? 'true' : 'false');
+                });
+
+                panes.forEach(p => {
+                    p.hidden = p.id !== target;
+                    p.classList.toggle('active', p.id === target);
+                });
+            }
+
+            buttons.forEach(b => b.addEventListener('click', () => activate(b.getAttribute('data-target'))));
+
+            // ensure initial state
+            const initial = document.querySelector('.tab-button.active')?.getAttribute('data-target') || 'home';
+            activate(initial);
+        })();
+    </script>
 </body>
 
 </html>
