@@ -9,12 +9,12 @@
         :root {
             --bg: #000000;
             --card: #0b0b0b;
-            --accent: rgb(255, 0, 255);
+            --accent: #ee8e71;
             --text: #ffffff
         }
 
         body {
-            font-family: monospace;
+            font-family: 'Amarna';
             margin: 0 40px 40px;
             background: var(--bg);
             color: var(--text)
@@ -27,8 +27,7 @@
         }
 
         .card {
-            background: var(--card);
-            padding: 20px;
+            padding: 12px;
             border-radius: 10px;
             box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06)
         }
@@ -37,48 +36,63 @@
             color: var(--accent);
             text-decoration: none
         }
+
+        /* Logo styles */
+        .logo {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <header class="card full-bleed">
-            <h1>Seattle Heels Camp 2026</h1>
-
+            <img src="logo.png" alt="Logo" class="logo">
             <nav class="tabs" role="tablist" aria-label="Primary">
-                <button class="tab-button active" data-target="home" role="tab" aria-selected="true">Home</button>
-                <button class="tab-button" data-target="register" role="tab" aria-selected="false">Register</button>
-                <button class="tab-button" data-target="faculty" role="tab" aria-selected="false">Faculty</button>
-                <button class="tab-button" data-target="schedule" role="tab" aria-selected="false">Schedule</button>
-                <button class="tab-button" data-target="venue" role="tab" aria-selected="false">Venue</button>
+                <button class="tab-button active" data-target="home" role="tab" aria-selected="true" id="defaultOpen"
+                    onclick="openPage('Home', this)">Home</button>
+                <a href="https://brushfire.com/seattleheelscamp2026/seattleheelscamp2026/622" target="_blank">
+                    <button class="tab-button" data-target="register" role="tab" aria-selected="false"
+                        onclick="openPage('Register', this)">Register</button>
+                </a>
+                <button class="tab-button" data-target="faculty" role="tab" aria-selected="false"
+                    onclick="openPage('Faculty', this)">Faculty</button>
+                <button class="tab-button" data-target="schedule" role="tab" aria-selected="false"
+                    onclick="openPage('Schedule', this)">Schedule</button>
+                <button class="tab-button" data-target="venue" role="tab" aria-selected="false"
+                    onclick="openPage('Venue', this)">Venue</button>
             </nav>
         </header>
 
         <section class="card" id="main-content" style="margin-top:16px;">
             <div class="tab-content">
-                <div id="home" class="tab-pane active" role="tabpanel">
-                    <iframe src="home.html" title="Home"
-                        style="width:100%;height:100%;border:0;min-height:300px;"></iframe>
+                <div id="Home" class="tabcontent">
+                    <h3 id="content-header">Home</h1>
+                        <p id="content-body">everyone flyer here</p>
                 </div>
 
-                <div id="register" class="tab-pane" role="tabpanel" hidden>
-                    <iframe src="register.html" title="Register"
-                        style="width:100%;height:100%;border:0;min-height:200px;"></iframe>
+                <div id="Register" class="tabcontent">
+                    <h3 id="content-header">Register</h3>
+                    <p id="content-body">Visit <a
+                            href="https://brushfire.com/seattleheelscamp2026/seattleheelscamp2026/622"
+                            target="_blank">Brushfire</a> to purchase tickets.</p>
                 </div>
 
-                <div id="faculty" class="tab-pane" role="tabpanel" hidden>
-                    <iframe src="faculty.html" title="Faculty"
-                        style="width:100%;height:100%;border:0;min-height:200px;"></iframe>
+                <div id="Faculty" class="tabcontent">
+                    <h3 id="content-header">Faculty</h3>
+                    <p id="content-body">Faculty info here (photo + intro)</p>
                 </div>
 
-                <div id="schedule" class="tab-pane" role="tabpanel" hidden>
-                    <iframe src="schedule.html" title="Schedule"
-                        style="width:100%;height:100%;border:0;min-height:200px;"></iframe>
+                <div id="Schedule" class="tabcontent">
+                    <h3 id="content-header">Schedule</h3>
+                    <p id="content-body">Schedule flyer here</p>
                 </div>
 
-                <div id="venue" class="tab-pane" role="tabpanel" hidden>
-                    <iframe src="venue.html" title="Venue"
-                        style="width:100%;height:100%;border:0;min-height:200px;"></iframe>
+                <div id="Venue" class="tabcontent">
+                    <h3 id="content-header">Venue</h3>
+                    <p id="content-body">Venue flyer</p>
                 </div>
             </div>
         </section>
@@ -87,9 +101,8 @@
     <style>
         .tabs {
             display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
             align-items: center;
+            column-gap: 24px;
         }
 
         /* layout the header: title on left, tabs centered on same row */
@@ -97,17 +110,15 @@
             width: 100vw;
             margin-left: calc(50% - 50vw);
             border-radius: 0;
-            padding: 20px 16px;
             box-sizing: border-box;
             display: grid;
             grid-template-columns: auto 1fr;
             align-items: center;
-            column-gap: 12px;
         }
 
         header.full-bleed.card h1 {
             font-size: 20px;
-            color: rgb(255, 0, 255);
+            color: #ee8e71;
             margin: 0;
         }
 
@@ -117,11 +128,11 @@
 
         .tab-button {
             background: transparent;
-            font-family: monospace;
-            padding: 8px 14px;
+            font-family: 'Amarna';
+            padding: 12px 18px;
             border-radius: 8px;
             cursor: pointer;
-            color: rgb(255, 0, 255);
+            color: #ee8e71;
             font-weight: bold;
             border-color: transparent;
         }
@@ -131,12 +142,22 @@
             color: #000;
             border-color: var(--accent);
             font-weight: bold;
-            font-family: monospace;
+            font-family: 'Amarna';
         }
 
         /* keep the content area visually separate from the header */
         #main-content {
             padding-top: 8px;
+        }
+
+        #content-body {
+            font-family: 'Amarna';
+            color: rgb(255, 255, 255);
+        }
+
+        #content-header {
+            font-family: 'Amarna';
+            color: #ee8e71;
         }
     </style>
 
@@ -165,6 +186,21 @@
             const initial = document.querySelector('.tab-button.active')?.getAttribute('data-target') || 'home';
             activate(initial);
         })();
+
+        function openPage(pageName, elmnt) {
+            // Hide all elements with class="tabcontent" by default */
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Show the specific tab content
+            document.getElementById(pageName).style.display = "block";
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
     </script>
 </body>
 
