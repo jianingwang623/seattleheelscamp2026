@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Seattle Heels Camp 2026</title>
     <style>
         :root {
@@ -50,19 +51,24 @@
     <div class="container">
         <header class="card full-bleed">
             <img src="logo.png" alt="Logo" class="logo">
-            <nav class="tabs" role="tablist" aria-label="Primary">
-                <button class="tab-button active" data-target="home" role="tab" aria-selected="true" id="defaultOpen"
-                    onclick="openPage('Home', this)">Home</button>
-                <a href="https://brushfire.com/seattleheelscamp2026/seattleheelscamp2026/622" target="_blank">
-                    <button class="tab-button" data-target="register" role="tab" aria-selected="false"
-                        onclick="openPage('Register', this)">Register</button>
+            <nav class="tabs" role="tablist" aria-label="Primary" id="responsiveTabs">
+                <a href="javascript:void(0);" class="tab-icon" onclick="myFunction()">
+                    <i class="fa fa-bars"></i>
                 </a>
-                <button class="tab-button" data-target="faculty" role="tab" aria-selected="false"
-                    onclick="openPage('Faculty', this)">Faculty</button>
-                <button class="tab-button" data-target="schedule" role="tab" aria-selected="false"
-                    onclick="openPage('Schedule', this)">Schedule</button>
-                <button class="tab-button" data-target="venue" role="tab" aria-selected="false"
-                    onclick="openPage('Venue', this)">Venue</button>
+                <div class="overlay-content">
+                    <button class="tab-button active" data-target="home" role="tab" aria-selected="true"
+                        id="defaultOpen" onclick="openPage('Home', this)">Home</button>
+                    <a href="https://brushfire.com/seattleheelscamp2026/seattleheelscamp2026/622" target="_blank">
+                        <button class="tab-button" data-target="register" role="tab" aria-selected="false"
+                            onclick="openPage('Register', this)">Register</button>
+                    </a>
+                    <button class="tab-button" data-target="faculty" role="tab" aria-selected="false"
+                        onclick="openPage('Faculty', this)">Faculty</button>
+                    <button class="tab-button" data-target="schedule" role="tab" aria-selected="false"
+                        onclick="openPage('Schedule', this)">Schedule</button>
+                    <button class="tab-button" data-target="venue" role="tab" aria-selected="false"
+                        onclick="openPage('Venue', this)">Venue</button>
+                </div>
             </nav>
         </header>
 
@@ -103,6 +109,52 @@
             display: flex;
             align-items: center;
             column-gap: 24px;
+            padding-left: 12px;
+            overflow: hidden;
+
+        }
+
+        .tab-button {
+            display: none;
+            float: left;
+            display: block;
+        }
+
+        .tab-icon {
+            display: none;
+        }
+
+        @media screen and (max-width: 600px) {
+            .tab-button {
+                display: none;
+            }
+
+            .tab-icon {
+                float: right;
+                display: block;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .tabs.responsive {
+                position: relative;
+                display: block;
+                column-gap: 4px;
+            }
+
+            .tabs.responsive .tab-icon {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+            .tabs.responsive .tab-button {
+                float: none;
+                display: block;
+                text-align: left;
+                /* margin-top: 40px; */
+                padding: 4px 8px;
+            }
         }
 
         /* layout the header: title on left, tabs centered on same row */
@@ -194,9 +246,20 @@
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
             }
+            myFunction();
 
             // Show the specific tab content
             document.getElementById(pageName).style.display = "block";
+        }
+
+        /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+        function myFunction() {
+            var x = document.getElementById("responsiveTabs");
+            if (x.className === "tabs") {
+                x.className += " responsive";
+            } else {
+                x.className = "tabs";
+            }
         }
 
         // Get the element with id="defaultOpen" and click on it
