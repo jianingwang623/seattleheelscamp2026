@@ -162,9 +162,34 @@
     </style>
 
     <script>
+        (function () {
+            const buttons = document.querySelectorAll('.tab-button');
+            const panes = document.querySelectorAll('.tab-pane');
+
+            function activate(target) {
+                buttons.forEach(b => {
+                    const t = b.getAttribute('data-target');
+                    const is = t === target;
+                    b.classList.toggle('active', is);
+                    b.setAttribute('aria-selected', is ? 'true' : 'false');
+                });
+
+                panes.forEach(p => {
+                    p.hidden = p.id !== target;
+                    p.classList.toggle('active', p.id === target);
+                });
+            }
+
+            buttons.forEach(b => b.addEventListener('click', () => activate(b.getAttribute('data-target'))));
+
+            // ensure initial state
+            const initial = document.querySelector('.tab-button.active')?.getAttribute('data-target') || 'home';
+            activate(initial);
+        })();
+
         function openPage(pageName, elmnt) {
-            // Hide all elements with class="tabcontent" by default
-            var i, tabcontent;
+            // Hide all elements with class="tabcontent" by default */
+            var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
