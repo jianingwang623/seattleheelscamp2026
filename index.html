@@ -44,6 +44,17 @@
             height: 72px;
             border-radius: 50%;
         }
+
+        .schedule-image {
+            width: 500px;
+            max-width: '80%';
+            padding: 12;
+            border-radius: 8px;
+        }
+
+        .tabcontent {
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -93,7 +104,7 @@
 
                 <div id="Schedule" class="tabcontent">
                     <h3 id="content-header">Schedule</h3>
-                    <p id="content-body">Schedule flyer here</p>
+                    <img src="schedule.jpg" alt="ScheduleImage" class="schedule-image">
                 </div>
 
                 <div id="Venue" class="tabcontent">
@@ -145,6 +156,7 @@
             .tabs.responsive .tab-icon {
                 position: absolute;
                 right: 0;
+                display: none;
                 top: 0;
             }
 
@@ -246,7 +258,8 @@
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
             }
-            myFunction();
+            var x = document.getElementById("responsiveTabs");
+            x.className = "tabs";
 
             // Show the specific tab content
             document.getElementById(pageName).style.display = "block";
