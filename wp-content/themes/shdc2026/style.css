@@ -1449,7 +1449,7 @@ body.page-template-first-edition-template section,body.page-template-second-edit
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    border-top: 11px solid #ee8e71;
+    /* border-top: 11px solid #ee8e71; */
     position: relative;
     overflow: hidden
 }
