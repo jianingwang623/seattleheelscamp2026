@@ -1444,7 +1444,7 @@ body.uwp_page .btn-outline-primary {
 }
 
 body.page-template-first-edition-template section,body.page-template-second-edition-template section,body.page-template-third-edition-template section,body.home section {
-    min-height: 100vh;
+    /* min-height: 100vh; */
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -1839,6 +1839,51 @@ body.page-template-first-edition-template section#footer h2,body.page-template-s
     }
 }
 
+/* Layout the choreographer items as a responsive grid: 3x3 on desktop */
+#choreographer .choreographer-row {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px; /* enforce only 12px bottom padding */
+    justify-content: center;
+    max-width: 60%;
+    align-items: center;
+    margin-bottom: 12px; /* reduce external bottom spacing */
+}
+
+@media screen and (max-width: 900px) {
+    #choreographer .choreographer-row {
+        grid-template-columns: repeat(2, auto);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #choreographer .choreographer-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (min-width: 901px) {
+    /* Desktop: limit grid width to 60% of the viewport and center it */
+    #choreographer .choreographer-row {
+        width: 60vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Limit each choreographer item to 100px and ensure the image stays square */
+#choreographer .choreographer {
+    max-width: 100px;
+    margin-bottom: 0; /* remove per-item bottom margin so section bottom stays 12px */
+}
+
+#choreographer .choreographer .img-wrap {
+    width: 100px;
+    padding-bottom: 100px; /* keep square */
+}
+
 .choreographer {
     margin-bottom: 1.75rem;
     text-decoration: none;
@@ -1862,6 +1907,57 @@ body.page-template-first-edition-template section#footer h2,body.page-template-s
     display: block;
     width: 100%;
     padding-bottom: 100%
+}
+
+/* Mobile-specific overrides to keep images centered */
+@media screen and (max-width: 600px) {
+    #choreographer .choreographer-row {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        justify-items: center;
+        place-items: center;
+        justify-content: center;
+        max-width: 100%;
+        padding-left: 12px;
+        padding-right: 12px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #choreographer .choreographer {
+        max-width: 100px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #choreographer .choreographer .img-wrap {
+        width: 100px;
+        padding-bottom: 100px;
+        margin: 0 auto;
+    }
+s
+    #choreographer .choreographer .img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Ensure the whole choreographer section has only 12px bottom spacing on mobile */
+    #choreographer {
+        padding-bottom: 12px !important;
+        margin-bottom: 0 !important;
+    }
+
+    #choreographer h2 {
+        margin-bottom: 12px !important;
+    }
+
+    #choreographer .choreographer-row {
+        margin-bottom: 0 !important;
+        padding-bottom: 12px !important;
+    }
 }
 
 .choreographer .img-wrap .country {
@@ -2422,12 +2518,6 @@ body.page-template-first-edition-template section#footer h2,body.page-template-s
     display: block
 }
 
-#competition,#choreographer,#photo-gallery {
-    background-color: #111;
-    color: #fff;
-    border-top: 11px solid #ee8e71
-}
-
 #team2 {
     background-image: url("images/concrete_wall_2.png");
     color: #111
@@ -2581,6 +2671,12 @@ body.page-template-first-edition-template section#footer h2,body.page-template-s
     background-size: cover
 }
 
+#choreographer {
+    height:fit-content;
+    background: linear-gradient(180deg, rgba(146, 84, 71, 0.8) 0%, rgba(108, 60, 51, 0.8) 35%, rgba(87, 44, 35, 0.8) 70%, rgba(43, 18, 13, 0.8) 100%);
+    align-items: center;
+}
+
 #schedule h2:not(.Timing_title__Hv0ou) {
     font-family: "Six Caps",sans-serif;
     font-size: 11rems
@@ -2724,7 +2820,6 @@ body.page-template-first-edition-template section#footer h2,body.page-template-s
     color: #bf9b30;
     text-shadow: 0 0 3px rgba(0,0,0,.1);
     -webkit-text-stroke: 1px #111;
-    text-stroke: 1px #111
 }
 
 #earlybird h3 {
@@ -2851,227 +2946,6 @@ body.page-template-first-edition-template #intro .intro-txt::before,body.page-te
         padding:7rem 15px 60px;
         margin-left: 0
     }
-}
-
-section#shop {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    justify-content: start;
-    background-image: url("images/swirl_pattern.webp")
-}
-
-section#shop>.container:first-child {
-    margin-top: 8.6rem
-}
-
-section#shop nav[aria-label=breadcrumb] {
-    margin-top: 10rem !important
-}
-
-section#shop+#footer {
-    border-top: 11px solid #111;
-    padding-top: 4rem
-}
-
-section#shop .logo-img {
-    display: block;
-    padding-bottom: 75%;
-    position: relative
-}
-
-section#shop .logo-img img {
-    position: absolute;
-    top: 35px;
-    left: 35px;
-    right: 35px;
-    bottom: 35px;
-    object-position: center;
-    object-fit: cover;
-    width: calc(100% - 70px) !important;
-    height: calc(100% - 70px) !important;
-    mix-blend-mode: multiply
-}
-
-@media screen and (max-width: 1200px) {
-    section#shop .logo-img img {
-        top:0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: 100% !important;
-        height: 100% !important
-    }
-}
-
-section#shop .woocommerce-ordering {
-    float: none;
-    display: flex;
-    justify-content: end;
-    position: relative
-}
-
-section#shop .woocommerce-ordering::after {
-    content: "";
-    width: 20px;
-    height: 20px;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 448 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z'/%3E%3C/svg%3E");
-    position: absolute;
-    z-index: 1;
-    right: 10px;
-    top: 10px;
-    background-position: center;
-    background-repeat: no-repeat
-}
-
-section#shop .single_add_to_cart_button {
-    position: relative
-}
-
-section#shop .single_add_to_cart_button::after {
-    content: "";
-    width: 27px;
-    height: 27px;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 448 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='white' d='M224 416c-8.188 0-16.38-3.125-22.62-9.375l-192-192c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L224 338.8l169.4-169.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-192 192C240.4 412.9 232.2 416 224 416z'/%3E%3C/svg%3E");
-    position: absolute;
-    right: 10px;
-    top: 13px;
-    background-position: center;
-    background-repeat: no-repeat;
-    transform: rotate(-95deg);
-    transform-origin: center
-}
-
-@media screen and (min-width: 1199.98px) {
-    section#shop .single_add_to_cart_button {
-        box-shadow:inset 0 0 0 0 #e63282 !important;
-        transition: all 800ms ease
-    }
-
-    section#shop .single_add_to_cart_button:hover,section#shop .single_add_to_cart_button:focus,section#shop .single_add_to_cart_button:active {
-        box-shadow: inset 0 0 100px 100px #e77654 !important
-    }
-}
-
-section#shop .form-control.orderby {
-    border: 3px solid #111;
-    max-width: 230px
-}
-
-@media screen and (max-width: 1200px) {
-    section#shop .form-control.orderby {
-        width:100%
-    }
-}
-
-section#shop .breadcrumb-item+.breadcrumb-item::before {
-    content: "|"
-}
-
-section#shop .breadcrumb {
-    font-weight: bold;
-    font-size: 14px
-}
-
-section#shop .breadcrumb a {
-    color: #ee8e71;
-    font-weight: bold
-}
-
-section#shop .product {
-    margin-bottom: .75rem
-}
-
-section#shop .product>a {
-    padding: 1rem;
-    background-color: #fff;
-    display: block;
-    max-width: 300px;
-    border-top-left-radius: .75rem;
-    border-top-right-radius: .75rem;
-    border-radius: .75rem;
-    box-shadow: 0 0 22px 0 rgba(0,0,0,.1)
-}
-
-section#shop .product .btn-primary {
-    width: 100%;
-    display: block;
-    font-size: 20px;
-    padding: 11px 15px;
-    background-color: #ee8e71;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-radius: .75rem;
-    margin-top: 22px;
-    box-shadow: 0 0 22px 0 rgba(0,0,0,.1)
-}
-
-@media screen and (max-width: 1200px) {
-    section#shop .product .btn-primary {
-        font-size:18px
-    }
-}
-
-section#shop .product .attachment-woocommerce_thumbnail {
-    border-top-left-radius: .75rem;
-    border-top-right-radius: .75rem;
-    overflow: hidden;
-    margin-left: -1rem;
-    margin-right: -1rem;
-    margin-top: -1rem;
-    max-width: calc(100% + 2rem)
-}
-
-section#shop .product .price {
-    margin-bottom: .5rem;
-    color: #111;
-    display: inline-block
-}
-
-section#shop .woocommerce-loop-product__title {
-    font-size: 27px;
-    margin-top: .75rem
-}
-
-@media screen and (max-width: 1200px) {
-    section#shop .woocommerce-loop-product__title {
-        font-size:18px
-    }
-}
-
-section#shop .woocommerce-loop-product__link {
-    text-decoration: none;
-    color: #111
-}
-
-.single-product .wc-tabs {
-    display: none
-}
-
-.single-product a {
-    color: #ee8e71
-}
-
-.single-product .quantity {
-    width: 100%;
-    margin-bottom: .75rem !important;
-    display: inline-block;
-    font-size: 18px !important
-}
-
-.single-product .quantity input {
-    width: auto !important;
-    min-width: 55px
-}
-
-.single-product .woocommerce-Tabs-panel h2 {
-    font-size: 27px
-}
-
-.single-product .btn-primary {
-    max-width: 440px
 }
 
 .wc-block-components-button {
@@ -3214,22 +3088,11 @@ body.woocommerce-account:not(.logged-in) #content .content .woocommerce .woocomm
     color: #fff
 }
 
-section#single {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: start;
-    border-top: 11px solid #ee8e71;
-    position: relative;
-    padding-top: 4.3rem
-}
-
 section#choreographers {
     color: #fff;
     border-top: 0;
     display: flex;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     justify-content: center;
     align-items: start;
     padding-top: 4.3rem;
