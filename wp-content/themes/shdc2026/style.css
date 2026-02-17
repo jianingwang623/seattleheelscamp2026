@@ -1835,27 +1835,6 @@ body.page-template-first-edition-template section#footer h2,body.page-template-s
     margin-bottom: 12px; /* reduce external bottom spacing */
 }
 
-/* Stronger overrides to ensure grid is applied in production (overrides .row flex) */
-#choreographer > .col-12 > .row.choreographer-row,
-#choreographer .choreographer-row {
-    display: grid !important;
-    grid-auto-flow: row !important;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) !important;
-    gap: 12px !important;
-    justify-items: center !important;
-    align-items: center !important;
-}
-
-/* Ensure direct img children behave as grid items and are centered */
-#choreographer .choreographer-row > img {
-    justify-self: center !important;
-    align-self: center !important;
-    max-width: 100px !important;
-    width: 100% !important;
-    height: auto !important;
-    display: block !important;
-}
-
 @media screen and (max-width: 900px) {
     #choreographer .choreographer-row {
         grid-template-columns: repeat(2, auto);
